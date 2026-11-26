@@ -1,7 +1,7 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795733384";
-import * as sp from "./spotify.js?v=1795733384";
-import * as be from "./backend.js?v=1795733384";
-import { idbGet, idbSet } from "./idb.js?v=1795733384";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795733771";
+import * as sp from "./spotify.js?v=1795733771";
+import * as be from "./backend.js?v=1795733771";
+import { idbGet, idbSet } from "./idb.js?v=1795733771";
 
 // ---------- game settings (easy to tweak) ----------
 const LEVEL_FIRST = 100;       // points needed to finish level 1
@@ -16,8 +16,8 @@ const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before
 
 // ---------- static data: the built-in list and the song corpus ----------
 const [builtinData, corpus] = await Promise.all([
-  fetch("data/words.json?v=1795733384").then((r) => r.json()),
-  fetch("data/index.json?v=1795733384").then((r) => r.json()),
+  fetch("data/words.json?v=1795733771").then((r) => r.json()),
+  fetch("data/index.json?v=1795733771").then((r) => r.json()),
 ]);
 const BUILTIN_ID = "builtin";
 const BUILTIN = {
@@ -513,7 +513,16 @@ function folderProgress(f) {
 }
 
 // ---------- login ----------
+function linkError() {
+  const q = new URLSearchParams((window.__authHash || "").replace(/^#/, ""));
+  const code = q.get("error_code") || q.get("error");
+  if (!code) return "";
+  window.__authHash = "";
+  return /expired|otp/i.test(code) ? "הקישור מהמייל כבר לא בתוקף (הוא עובד פעם אחת ולזמן קצר). בקשו קישור חדש." : "הקישור מהמייל לא עבד. נסו שוב.";
+}
+
 function loginView(mode = "in") {
+  const linkErr = linkError();
   app.innerHTML = `
     <section class="login panel">
       <div class="login-logo">🎵</div>
@@ -529,7 +538,7 @@ function loginView(mode = "in") {
         ${mode !== "reset" ? `<input id="password" type="password" dir="ltr" placeholder="סיסמה" autocomplete="${mode === "up" ? "new-password" : "current-password"}" minlength="6" required>` : ""}
         <button class="big-btn small wide">${mode === "up" ? "יצירת חשבון משפחתי" : mode === "reset" ? "שליחת קישור לאיפוס" : "כניסה"}</button>
       </form>
-      <div id="login-msg"></div>
+      <div id="login-msg">${linkErr ? `<p class="err">${linkErr}</p>` : ""}</div>
       <p class="login-links">
         ${mode === "in" ? `<button class="link-btn" data-mode="reset">שכחתי סיסמה</button>` : mode === "reset" ? `<button class="link-btn" data-mode="in">חזרה לכניסה</button>` : ""}
       </p>
@@ -572,7 +581,7 @@ function newPasswordView() {
     </section>`;
   $("#pw-form").addEventListener("submit", async (e) => {
     e.preventDefault();
-    try { await be.setPassword($("#pw").value); toast("הסיסמה עודכנה ✓"); location.hash = "#/"; await start(); }
+    try { await be.setPassword($("#pw").value); recovering = false; toast("הסיסמה עודכנה ✓"); history.replaceState(null, "", location.pathname + "#/"); await start(); }
     catch (err) { $("#pw-msg").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
   });
 }
@@ -1509,9 +1518,11 @@ async function render() {
   });
 }
 
+let recovering = /type=recovery/.test(window.__authHash || "");
 async function start() {
   const s = await be.session();
   user = s?.user || null;
+  if (recovering && user) { recovering = false; newPasswordView(); return; }
   if (user) localStorage.setItem("vk.everSignedIn", "1");
   if (user) {
     app.innerHTML = `<p class="loading">טוען…</p>`;
@@ -1529,7 +1540,7 @@ try {
 } catch (e) { toast(esc(e.message)); }
 sp.initPlayer();
 be.onAuth((event) => {
-  if (event === "PASSWORD_RECOVERY") newPasswordView();
+  if (event === "PASSWORD_RECOVERY") { recovering = true; newPasswordView(); }
   if (event === "SIGNED_OUT") { user = null; family = null; pstates = {}; render(); }
 });
 await start();
