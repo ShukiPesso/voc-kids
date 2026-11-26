@@ -9,6 +9,7 @@ const PTS_EXAM_SPELL = 10;     // correct spelling in the exam
 const PTS_GAME = 2;            // correct answer in the song game
 const SECS_PER_LISTEN_PT = 2;  // 1 point for every 2 seconds of song listened
 const LISTEN_REPEATS_PER_DAY = 2; // the same snippet earns listening points up to twice a day
+const SNIPPET_TAIL_MS = 2500;  // keep playing this long after the line ends, so a word at the end of the line isn't cut off
 
 // ---------- data ----------
 const [wordsData, indexData] = await Promise.all([
@@ -208,11 +209,12 @@ async function playHit(hit, btn, wordKey = "") {
   try {
     const track = await sp.findTrack(hit.song);
     if (!track) { setPlaying(null); toast("לא מצאנו את השיר הזה בספוטיפיי 🤷"); return; }
-    await sp.playSnippet(track.uri, hit.start, hit.end, () => {
+    const end = hit.end + SNIPPET_TAIL_MS;
+    await sp.playSnippet(track.uri, hit.start, end, () => {
       finishListening();
       if (playingBtn === btn) setPlaying(null);
     });
-    listening = { key: `${wordKey}|${songKey(hit.song)}`, t0: Date.now(), maxMs: hit.end - hit.start, btn };
+    listening = { key: `${wordKey}|${songKey(hit.song)}`, t0: Date.now(), maxMs: end - hit.start, btn };
   } catch (e) { setPlaying(null); playError(e); }
 }
 function setPlaying(btn) {
