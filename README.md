@@ -24,7 +24,7 @@ python3 -m http.server 8888 --bind 127.0.0.1
 2. אפשר להוסיף שירים ל-`data/songs.json`.
 3. מריצים `node scripts/build-index.mjs`. הסקריפט מוריד מילים מתוזמנות מ-LRCLIB ובונה את `data/index.json`.
 4. כדי למצוא שירים למילים שאין להן מספיק: `node scripts/suggest-songs.mjs candidates.json`.
-5. עושים commit ו-push, והאתר מתעדכן תוך דקה-שתיים.
+5. מפרסמים עם `scripts/release.sh "תיאור השינוי"`. הסקריפט מעדכן את מספר הגרסה של הקבצים (כדי שדפדפנים לא יערבבו קבצים ישנים וחדשים), עושה commit ו-push, והאתר מתעדכן תוך דקה-שתיים.
 
 ## מבנה
 - `lib/matcher.js`: זיהוי צורות של כל מילה (fell, lovin', travelled…) ומציאתן בשורות השירים. משמש גם את סקריפט הבנייה וגם את הדפדפן.

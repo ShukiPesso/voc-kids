@@ -1,5 +1,5 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics } from "../lib/matcher.js?v=1795730891";
-import * as sp from "./spotify.js?v=1795730891";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics } from "../lib/matcher.js?v=1795730899";
+import * as sp from "./spotify.js?v=1795730899";
 
 // ---------- game settings (easy to tweak) ----------
 const LEVEL_FIRST = 100;       // points needed to finish level 1
@@ -14,8 +14,8 @@ const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before
 
 // ---------- data ----------
 const [wordsData, indexData] = await Promise.all([
-  fetch("data/words.json?v=1795730891").then((r) => r.json()),
-  fetch("data/index.json?v=1795730891").then((r) => r.json()),
+  fetch("data/words.json?v=1795730899").then((r) => r.json()),
+  fetch("data/index.json?v=1795730899").then((r) => r.json()),
 ]);
 const list = wordsData.lists[0];
 const WORDS = list.words.map((w) => ({ ...w, id: wordId(w) }));
