@@ -1,7 +1,7 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795733156";
-import * as sp from "./spotify.js?v=1795733156";
-import * as be from "./backend.js?v=1795733156";
-import { idbGet, idbSet } from "./idb.js?v=1795733156";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795733384";
+import * as sp from "./spotify.js?v=1795733384";
+import * as be from "./backend.js?v=1795733384";
+import { idbGet, idbSet } from "./idb.js?v=1795733384";
 
 // ---------- game settings (easy to tweak) ----------
 const LEVEL_FIRST = 100;       // points needed to finish level 1
@@ -16,8 +16,8 @@ const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before
 
 // ---------- static data: the built-in list and the song corpus ----------
 const [builtinData, corpus] = await Promise.all([
-  fetch("data/words.json?v=1795733156").then((r) => r.json()),
-  fetch("data/index.json?v=1795733156").then((r) => r.json()),
+  fetch("data/words.json?v=1795733384").then((r) => r.json()),
+  fetch("data/index.json?v=1795733384").then((r) => r.json()),
 ]);
 const BUILTIN_ID = "builtin";
 const BUILTIN = {
