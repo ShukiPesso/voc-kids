@@ -30,3 +30,11 @@ python3 -m http.server 8888 --bind 127.0.0.1
 - `lib/matcher.js`: זיהוי צורות של כל מילה (fell, lovin', travelled…) ומציאתן בשורות השירים. משמש גם את סקריפט הבנייה וגם את הדפדפן.
 - `js/spotify.js`: התחברות לספוטיפיי (PKCE), חיפוש שירים, ניגון קטע וייבוא פלייליסטים.
 - `js/app.js`: המסכים: רשימת המילים, מסך מילה, חידון והגדרות.
+
+## שרת (Supabase)
+- פרויקט: `cpvlhtipmkncbgibdvbs`. חשבון אחד לכל משפחה; הילדים הם פרופילים בתוך החשבון.
+- `supabase/migrations`: הטבלאות וחוקי הגישה (משפחה רואה רק את שלה, תיקייה ציבורית רק אחרי אישור מנהל).
+- `supabase/functions/scan-words`: סריקת דף מילים עם Claude. צריך את הסוד `ANTHROPIC_API_KEY` (`supabase secrets set`). מוגבל ל-30 סריקות ביום למשפחה.
+- עדכון מסד הנתונים: `supabase db push --remote`. עדכון הפונקציה: `supabase functions deploy scan-words --use-api`.
+- פיתוח מקומי: `supabase start`, ובדפדפן `localStorage.setItem("vk.dev", "1")`.
+- `data/index.json` כולל גם אינדקס מגובב של מילים (hash בלבד, בלי טקסט), כדי שבבניית תיקייה חדשה הדפדפן יוריד מילים רק של שירים רלוונטיים.

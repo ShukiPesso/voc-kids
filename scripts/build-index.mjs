@@ -4,7 +4,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { buildMatcher, parseLRC, indexLyrics, pickLyrics } from "../lib/matcher.js";
+import { buildMatcher, parseLRC, indexLyrics, pickLyrics, tokens, tokenHash } from "../lib/matcher.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const dataDir = path.join(root, "data");
@@ -44,19 +44,22 @@ const matchers = lists.flatMap((l) => l.words).map(buildMatcher);
 
 const outSongs = [];
 const hits = {};
+const tokenIndex = {}; // hashed word -> songs containing it (no lyric text)
 const missing = [];
 for (const [title, artist, group] of songs) {
   const lyr = await lyricsFor(title, artist);
   if (!lyr) { missing.push(`${title} – ${artist}`); continue; }
   const s = outSongs.length;
   outSongs.push({ title, artist, group, duration: lyr.duration, lrclib: lyr.id });
-  const found = indexLyrics(parseLRC(lyr.syncedLyrics), matchers);
+  const lines = parseLRC(lyr.syncedLyrics);
+  for (const h of new Set(lines.flatMap((l) => tokens(l.text)).map(tokenHash))) (tokenIndex[h] ||= []).push(s);
+  const found = indexLyrics(lines, matchers);
   // No lyric text in the published index: only where the line is. The app loads the line live from LRCLIB.
   for (const [id, hit] of Object.entries(found)) (hits[id] ||= []).push({ s, t: hit.t, start: hit.start, end: hit.end });
   process.stdout.write(".");
 }
 
-await writeFile(path.join(dataDir, "index.json"), JSON.stringify({ builtAt: new Date().toISOString(), songs: outSongs, hits }));
+await writeFile(path.join(dataDir, "index.json"), JSON.stringify({ builtAt: new Date().toISOString(), songs: outSongs, hits, tokens: tokenIndex }));
 
 console.log(`\n${outSongs.length} songs indexed, ${missing.length} without synced lyrics.`);
 if (missing.length) console.log("Missing:\n  " + missing.join("\n  "));

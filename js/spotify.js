@@ -19,7 +19,7 @@ export async function login() {
   const challenge = b64url(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier)));
   const q = new URLSearchParams({
     client_id: getClientId(), response_type: "code", redirect_uri: redirectUri(),
-    scope: SCOPES, code_challenge_method: "S256", code_challenge: challenge,
+    scope: SCOPES, code_challenge_method: "S256", code_challenge: challenge, state: "spotify",
   });
   location.href = `${AUTH}/authorize?${q}`;
 }
@@ -47,6 +47,7 @@ async function tokenRequest(params) {
 // Call once on page load: finishes the login redirect if there is one.
 export async function handleRedirect() {
   const q = new URLSearchParams(location.search);
+  if (q.get("state") !== "spotify") return null; // not a Spotify redirect
   if (q.get("error")) { history.replaceState(null, "", redirectUri() + location.hash); return q.get("error"); }
   if (!q.get("code")) return null;
   await tokenRequest({ grant_type: "authorization_code", code: q.get("code"), redirect_uri: redirectUri(), code_verifier: localStorage.getItem(LS.verifier) });

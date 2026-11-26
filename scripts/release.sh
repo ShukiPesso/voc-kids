@@ -5,7 +5,7 @@
 set -e
 cd "$(dirname "$0")/.."
 v=$(date +%s)
-sed -i '' -E "s/\?v=[0-9]+/?v=$v/g" index.html js/app.js
+sed -i '' -E "s/\?v=[0-9]+/?v=$v/g" index.html js/app.js js/backend.js
 git add -A
 git commit -m "${1:-Update}" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push
