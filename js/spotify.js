@@ -5,7 +5,10 @@ const SCOPES = "streaming user-read-email user-read-private user-read-playback-s
 const LS = { clientId: "vk.spotify.clientId", token: "vk.spotify.token", verifier: "vk.spotify.verifier", tracks: "vk.spotify.tracks" };
 
 export const redirectUri = () => location.origin + location.pathname;
-export const getClientId = () => localStorage.getItem(LS.clientId) || "";
+// Spotify app Client ID (public by design for browser apps using PKCE; not a secret).
+// A Client ID pasted in the settings page overrides it.
+const DEFAULT_CLIENT_ID = "b9df10183947468baed8bc389eaf5689";
+export const getClientId = () => localStorage.getItem(LS.clientId) || DEFAULT_CLIENT_ID;
 export const setClientId = (id) => localStorage.setItem(LS.clientId, id.trim());
 
 const b64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
