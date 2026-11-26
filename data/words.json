@@ -1,0 +1,622 @@
+{
+ "lists": [
+  {
+   "id": "unit-word-review-p32",
+   "title": "Word Review – עמוד 32",
+   "words": [
+    {
+     "en": "activity",
+     "he": "פעילות",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "band",
+     "he": "להקה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "bowl",
+     "he": "קערה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "bridge",
+     "he": "גשר",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "choice",
+     "he": "בחירה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "club",
+     "he": "מועדון",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "danger",
+     "he": "סכנה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "English",
+     "he": "אנגלית",
+     "pos": "noun",
+     "extra": [
+      "englishman"
+     ],
+     "section": "nouns"
+    },
+    {
+     "en": "form",
+     "he": "טופס; צורה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "geography",
+     "he": "גאוגרפיה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "guide",
+     "he": "מדריך",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "history",
+     "he": "היסטוריה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "job",
+     "he": "עבודה, משרה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "journey",
+     "he": "מסע",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "lemon",
+     "he": "לימון",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "list",
+     "he": "רשימה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "math",
+     "he": "מתמטיקה",
+     "pos": "noun",
+     "extra": [
+      "maths"
+     ],
+     "section": "nouns"
+    },
+    {
+     "en": "meal",
+     "he": "ארוחה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "mountain",
+     "he": "הר",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "nation",
+     "he": "אומה, מדינה",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "office",
+     "he": "משרד",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "oil",
+     "he": "שמן",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "pepper",
+     "he": "פלפל",
+     "pos": "noun",
+     "extra": [
+      "pepper's"
+     ],
+     "section": "nouns"
+    },
+    {
+     "en": "physics",
+     "he": "פיזיקה",
+     "pos": "fixed",
+     "section": "nouns"
+    },
+    {
+     "en": "river",
+     "he": "נהר",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "salt",
+     "he": "מלח",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "science",
+     "he": "מדע",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "team",
+     "he": "קבוצה, צוות",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "theater",
+     "he": "תיאטרון",
+     "pos": "noun",
+     "extra": [
+      "theatre",
+      "theatres"
+     ],
+     "section": "nouns"
+    },
+    {
+     "en": "variety",
+     "he": "מגוון",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "village",
+     "he": "כפר",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "world",
+     "he": "עולם",
+     "pos": "noun",
+     "section": "nouns"
+    },
+    {
+     "en": "writing",
+     "he": "כתיבה",
+     "pos": "fixed",
+     "section": "nouns"
+    },
+    {
+     "en": "brush",
+     "he": "מברשת; להבריש",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "color",
+     "he": "צבע; לצבוע",
+     "pos": "nounverb",
+     "extra": [
+      "colour",
+      "colours",
+      "coloured",
+      "colorful",
+      "colourful"
+     ],
+     "section": "nounverb"
+    },
+    {
+     "en": "comb",
+     "he": "מסרק; לסרק",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "drive",
+     "he": "נסיעה; לנהוג",
+     "pos": "nounverb",
+     "extra": [
+      "drove",
+      "driven"
+     ],
+     "section": "nounverb"
+    },
+    {
+     "en": "help",
+     "he": "עזרה; לעזור",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "love",
+     "he": "אהבה; לאהוב",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "pay",
+     "he": "תשלום; לשלם",
+     "pos": "nounverb",
+     "extra": [
+      "paid"
+     ],
+     "section": "nounverb"
+    },
+    {
+     "en": "point",
+     "he": "נקודה; להצביע",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "sleep",
+     "he": "שינה; לישון",
+     "pos": "nounverb",
+     "extra": [
+      "slept"
+     ],
+     "section": "nounverb"
+    },
+    {
+     "en": "travel",
+     "he": "נסיעה; לטייל",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "work",
+     "he": "עבודה; לעבוד",
+     "pos": "nounverb",
+     "section": "nounverb"
+    },
+    {
+     "en": "amaze",
+     "he": "להדהים",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "continue",
+     "he": "להמשיך",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "depend on",
+     "he": "להיות תלוי ב־, לסמוך על",
+     "pos": "phrase",
+     "match": [
+      "depend(?:s|ed|ing)? on"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "fall (fell) in love",
+     "he": "להתאהב",
+     "pos": "phrase",
+     "match": [
+      "(?:fall(?:s|ing|in'|en)?|fell) in love"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "feed",
+     "he": "להאכיל",
+     "pos": "verb",
+     "extra": [
+      "fed"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "fill in",
+     "he": "למלא (טופס)",
+     "pos": "phrase",
+     "match": [
+      "fill(?:s|ed|ing)? in"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "fix",
+     "he": "לתקן",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "follow",
+     "he": "ללכת אחרי; לעקוב",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "imagine",
+     "he": "לדמיין",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "join",
+     "he": "להצטרף",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "open",
+     "he": "לפתוח; פתוח",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "prefer",
+     "he": "להעדיף",
+     "pos": "verb",
+     "extra": [
+      "preferred",
+      "preferring"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "realize",
+     "he": "להבין, לקלוט",
+     "pos": "verb",
+     "extra": [
+      "realise",
+      "realised",
+      "realises",
+      "realising"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "receive",
+     "he": "לקבל",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "serve",
+     "he": "להגיש; לשרת",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "shake hands",
+     "he": "ללחוץ ידיים",
+     "pos": "phrase",
+     "match": [
+      "(?:shak(?:e|es|ing)|shook) hands"
+     ],
+     "section": "verbs"
+    },
+    {
+     "en": "welcome",
+     "he": "ברוכים הבאים; לקבל בברכה",
+     "pos": "verb",
+     "section": "verbs"
+    },
+    {
+     "en": "amazing",
+     "he": "מדהים",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "careful",
+     "he": "זהיר",
+     "pos": "adj",
+     "extra": [
+      "carefully"
+     ],
+     "section": "adjectives"
+    },
+    {
+     "en": "certain",
+     "he": "בטוח; מסוים",
+     "pos": "adj",
+     "extra": [
+      "certainly"
+     ],
+     "section": "adjectives"
+    },
+    {
+     "en": "dangerous",
+     "he": "מסוכן",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "foreign",
+     "he": "זר, מחוץ לארץ",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "interested (in)",
+     "he": "מתעניין (ב־)",
+     "pos": "phrase",
+     "match": [
+      "interested"
+     ],
+     "section": "adjectives"
+    },
+    {
+     "en": "lovely",
+     "he": "מקסים, נחמד",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "main",
+     "he": "עיקרי, ראשי",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "possible",
+     "he": "אפשרי",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "typical",
+     "he": "טיפוסי, רגיל",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "unusual",
+     "he": "לא רגיל, יוצא דופן",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "usual",
+     "he": "רגיל, הרגיל",
+     "pos": "adj",
+     "extra": [
+      "usually"
+     ],
+     "section": "adjectives"
+    },
+    {
+     "en": "warm",
+     "he": "חם, חמים",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "wide",
+     "he": "רחב",
+     "pos": "adj",
+     "section": "adjectives"
+    },
+    {
+     "en": "according to",
+     "he": "לפי, על פי",
+     "pos": "phrase",
+     "match": [
+      "according to"
+     ],
+     "section": "other"
+    },
+    {
+     "en": "across",
+     "he": "מעבר ל־, לרוחב",
+     "pos": "fixed",
+     "section": "other"
+    },
+    {
+     "en": "any",
+     "he": "כלשהו, בכלל",
+     "pos": "fixed",
+     "section": "other"
+    },
+    {
+     "en": "anybody",
+     "he": "מישהו, כל אחד",
+     "pos": "fixed",
+     "section": "other"
+    },
+    {
+     "en": "around here",
+     "he": "כאן באזור",
+     "pos": "phrase",
+     "match": [
+      "around here"
+     ],
+     "section": "other"
+    },
+    {
+     "en": "directly",
+     "he": "ישירות",
+     "pos": "fixed",
+     "section": "other"
+    },
+    {
+     "en": "I'd love to",
+     "he": "הייתי שמח/ה ל־",
+     "pos": "phrase",
+     "match": [
+      "i'd love to",
+      "i would love to"
+     ],
+     "section": "other"
+    },
+    {
+     "en": "next to",
+     "he": "ליד",
+     "pos": "phrase",
+     "match": [
+      "next to"
+     ],
+     "section": "other"
+    },
+    {
+     "en": "Nice to meet you.",
+     "he": "נעים להכיר",
+     "pos": "phrase",
+     "match": [
+      "nice to meet you"
+     ],
+     "section": "other"
+    },
+    {
+     "en": "What about ...?",
+     "he": "מה לגבי...?",
+     "pos": "phrase",
+     "match": [
+      "what about"
+     ],
+     "section": "other"
+    },
+    {
+     "en": "would you like ...?",
+     "he": "היית רוצה...?",
+     "pos": "phrase",
+     "match": [
+      "would you like"
+     ],
+     "section": "other"
+    }
+   ]
+  }
+ ],
+ "sections": {
+  "nouns": "NOUNS · שמות עצם",
+  "nounverb": "NOUNS AND VERBS · שם עצם ופועל",
+  "verbs": "VERBS · פעלים",
+  "adjectives": "ADJECTIVES · תארים",
+  "other": "OTHER · ביטויים ומילים נוספות"
+ }
+}

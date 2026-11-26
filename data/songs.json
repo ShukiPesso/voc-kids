@@ -1,0 +1,1635 @@
+{
+ "_comment": "Seed songs the kids are likely to know. Each entry: [title, artist, group]. Add more freely and re-run: node scripts/build-index.mjs",
+ "songs": [
+  [
+   "I'll Make a Man Out of You",
+   "Donny Osmond",
+   "Disney"
+  ],
+  [
+   "Reflection",
+   "Lea Salonga",
+   "Disney"
+  ],
+  [
+   "Let It Go",
+   "Idina Menzel",
+   "Disney"
+  ],
+  [
+   "Do You Want to Build a Snowman?",
+   "Kristen Bell",
+   "Disney"
+  ],
+  [
+   "For the First Time in Forever",
+   "Kristen Bell",
+   "Disney"
+  ],
+  [
+   "Love Is an Open Door",
+   "Kristen Bell",
+   "Disney"
+  ],
+  [
+   "Into the Unknown",
+   "Idina Menzel",
+   "Disney"
+  ],
+  [
+   "Show Yourself",
+   "Idina Menzel",
+   "Disney"
+  ],
+  [
+   "Some Things Never Change",
+   "Kristen Bell",
+   "Disney"
+  ],
+  [
+   "Lost in the Woods",
+   "Jonathan Groff",
+   "Disney"
+  ],
+  [
+   "How Far I'll Go",
+   "Auli'i Cravalho",
+   "Disney"
+  ],
+  [
+   "You're Welcome",
+   "Dwayne Johnson",
+   "Disney"
+  ],
+  [
+   "We Know the Way",
+   "Opetaia Foa'i",
+   "Disney"
+  ],
+  [
+   "Shiny",
+   "Jemaine Clement",
+   "Disney"
+  ],
+  [
+   "We Don't Talk About Bruno",
+   "Carolina Gaitán",
+   "Disney"
+  ],
+  [
+   "Surface Pressure",
+   "Jessica Darrow",
+   "Disney"
+  ],
+  [
+   "What Else Can I Do?",
+   "Diane Guerrero",
+   "Disney"
+  ],
+  [
+   "The Family Madrigal",
+   "Stephanie Beatriz",
+   "Disney"
+  ],
+  [
+   "Waiting on a Miracle",
+   "Stephanie Beatriz",
+   "Disney"
+  ],
+  [
+   "Dos Oruguitas",
+   "Sebastián Yatra",
+   "Disney"
+  ],
+  [
+   "Part of Your World",
+   "Jodi Benson",
+   "Disney"
+  ],
+  [
+   "Under the Sea",
+   "Samuel E. Wright",
+   "Disney"
+  ],
+  [
+   "Kiss the Girl",
+   "Samuel E. Wright",
+   "Disney"
+  ],
+  [
+   "A Whole New World",
+   "Brad Kane",
+   "Disney"
+  ],
+  [
+   "Friend Like Me",
+   "Robin Williams",
+   "Disney"
+  ],
+  [
+   "Prince Ali",
+   "Robin Williams",
+   "Disney"
+  ],
+  [
+   "Speechless",
+   "Naomi Scott",
+   "Disney"
+  ],
+  [
+   "Hakuna Matata",
+   "Nathan Lane",
+   "Disney"
+  ],
+  [
+   "Circle of Life",
+   "Carmen Twillie",
+   "Disney"
+  ],
+  [
+   "I Just Can't Wait to Be King",
+   "Jason Weaver",
+   "Disney"
+  ],
+  [
+   "Can You Feel the Love Tonight",
+   "Elton John",
+   "Disney"
+  ],
+  [
+   "Beauty and the Beast",
+   "Angela Lansbury",
+   "Disney"
+  ],
+  [
+   "Belle",
+   "Paige O'Hara",
+   "Disney"
+  ],
+  [
+   "Be Our Guest",
+   "Jerry Orbach",
+   "Disney"
+  ],
+  [
+   "Gaston",
+   "Jesse Corti",
+   "Disney"
+  ],
+  [
+   "I See the Light",
+   "Mandy Moore",
+   "Disney"
+  ],
+  [
+   "When Will My Life Begin",
+   "Mandy Moore",
+   "Disney"
+  ],
+  [
+   "I've Got a Dream",
+   "Mandy Moore",
+   "Disney"
+  ],
+  [
+   "Colors of the Wind",
+   "Judy Kuhn",
+   "Disney"
+  ],
+  [
+   "Just Around the Riverbend",
+   "Judy Kuhn",
+   "Disney"
+  ],
+  [
+   "Go the Distance",
+   "Roger Bart",
+   "Disney"
+  ],
+  [
+   "Zero to Hero",
+   "Lillias White",
+   "Disney"
+  ],
+  [
+   "I Won't Say (I'm in Love)",
+   "Susan Egan",
+   "Disney"
+  ],
+  [
+   "You've Got a Friend in Me",
+   "Randy Newman",
+   "Disney"
+  ],
+  [
+   "Almost There",
+   "Anika Noni Rose",
+   "Disney"
+  ],
+  [
+   "Remember Me",
+   "Miguel",
+   "Disney"
+  ],
+  [
+   "Un Poco Loco",
+   "Anthony Gonzalez",
+   "Disney"
+  ],
+  [
+   "You'll Be in My Heart",
+   "Phil Collins",
+   "Disney"
+  ],
+  [
+   "Strangers Like Me",
+   "Phil Collins",
+   "Disney"
+  ],
+  [
+   "Two Worlds",
+   "Phil Collins",
+   "Disney"
+  ],
+  [
+   "True to Your Heart",
+   "98 Degrees",
+   "Disney"
+  ],
+  [
+   "The Bare Necessities",
+   "Phil Harris",
+   "Disney"
+  ],
+  [
+   "I Wan'na Be Like You",
+   "Louis Prima",
+   "Disney"
+  ],
+  [
+   "A Spoonful of Sugar",
+   "Julie Andrews",
+   "Disney"
+  ],
+  [
+   "Bibbidi-Bobbidi-Boo",
+   "Verna Felton",
+   "Disney"
+  ],
+  [
+   "This Wish",
+   "Ariana DeBose",
+   "Disney"
+  ],
+  [
+   "Try Everything",
+   "Shakira",
+   "Disney"
+  ],
+  [
+   "Life Is a Highway",
+   "Rascal Flatts",
+   "Disney"
+  ],
+  [
+   "We're All in This Together",
+   "High School Musical Cast",
+   "Disney"
+  ],
+  [
+   "Breaking Free",
+   "Zac Efron",
+   "Disney"
+  ],
+  [
+   "Start of Something New",
+   "Zac Efron",
+   "Disney"
+  ],
+  [
+   "This Is Me",
+   "Demi Lovato",
+   "Disney"
+  ],
+  [
+   "The Best of Both Worlds",
+   "Hannah Montana",
+   "Disney"
+  ],
+  [
+   "Rotten to the Core",
+   "Dove Cameron",
+   "Disney"
+  ],
+  [
+   "Golden",
+   "HUNTR/X",
+   "KPop Demon Hunters"
+  ],
+  [
+   "Soda Pop",
+   "Saja Boys",
+   "KPop Demon Hunters"
+  ],
+  [
+   "How It's Done",
+   "HUNTR/X",
+   "KPop Demon Hunters"
+  ],
+  [
+   "What It Sounds Like",
+   "HUNTR/X",
+   "KPop Demon Hunters"
+  ],
+  [
+   "Free",
+   "Rumi",
+   "KPop Demon Hunters"
+  ],
+  [
+   "Your Idol",
+   "Saja Boys",
+   "KPop Demon Hunters"
+  ],
+  [
+   "This Is Me",
+   "Keala Settle",
+   "Musicals"
+  ],
+  [
+   "A Million Dreams",
+   "Ziv Zaifman",
+   "Musicals"
+  ],
+  [
+   "Rewrite the Stars",
+   "Zac Efron",
+   "Musicals"
+  ],
+  [
+   "The Greatest Show",
+   "Hugh Jackman",
+   "Musicals"
+  ],
+  [
+   "Never Enough",
+   "Loren Allred",
+   "Musicals"
+  ],
+  [
+   "Come Alive",
+   "Hugh Jackman",
+   "Musicals"
+  ],
+  [
+   "The Other Side",
+   "Hugh Jackman",
+   "Musicals"
+  ],
+  [
+   "Popular",
+   "Ariana Grande",
+   "Musicals"
+  ],
+  [
+   "Defying Gravity",
+   "Cynthia Erivo",
+   "Musicals"
+  ],
+  [
+   "Dancing Through Life",
+   "Jonathan Bailey",
+   "Musicals"
+  ],
+  [
+   "The Wizard and I",
+   "Cynthia Erivo",
+   "Musicals"
+  ],
+  [
+   "Bye Bye Bye",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "It's Gonna Be Me",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "Tearin' Up My Heart",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "This I Promise You",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "Girlfriend",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "Pop",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "I Want You Back",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "Gone",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "God Must Have Spent a Little More Time on You",
+   "NSYNC",
+   "Boy Bands"
+  ],
+  [
+   "I Want It That Way",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Everybody (Backstreet's Back)",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "As Long as You Love Me",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Quit Playing Games (With My Heart)",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Larger Than Life",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Shape of My Heart",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Show Me the Meaning of Being Lonely",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "The One",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Incomplete",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "I'll Never Break Your Heart",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "All I Have to Give",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Drowning",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Swear It Again",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "Flying Without Wings",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "My Love",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "Uptown Girl",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "You Raise Me Up",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "World of Our Own",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "What Makes You Beautiful",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Story of My Life",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Night Changes",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Best Song Ever",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Live While We're Young",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Little Things",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Drag Me Down",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Steal My Girl",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "One Thing",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "History",
+   "One Direction",
+   "Boy Bands"
+  ],
+  [
+   "Back for Good",
+   "Take That",
+   "Boy Bands"
+  ],
+  [
+   "Shine",
+   "Take That",
+   "Boy Bands"
+  ],
+  [
+   "Patience",
+   "Take That",
+   "Boy Bands"
+  ],
+  [
+   "Rule the World",
+   "Take That",
+   "Boy Bands"
+  ],
+  [
+   "No Matter What",
+   "Boyzone",
+   "Boy Bands"
+  ],
+  [
+   "Picture of You",
+   "Boyzone",
+   "Boy Bands"
+  ],
+  [
+   "MMMBop",
+   "Hanson",
+   "Boy Bands"
+  ],
+  [
+   "Year 3000",
+   "Jonas Brothers",
+   "Boy Bands"
+  ],
+  [
+   "Burnin' Up",
+   "Jonas Brothers",
+   "Boy Bands"
+  ],
+  [
+   "S.O.S",
+   "Jonas Brothers",
+   "Boy Bands"
+  ],
+  [
+   "Sucker",
+   "Jonas Brothers",
+   "Boy Bands"
+  ],
+  [
+   "She Looks So Perfect",
+   "5 Seconds of Summer",
+   "Boy Bands"
+  ],
+  [
+   "Dynamite",
+   "BTS",
+   "Boy Bands"
+  ],
+  [
+   "Butter",
+   "BTS",
+   "Boy Bands"
+  ],
+  [
+   "Permission to Dance",
+   "BTS",
+   "Boy Bands"
+  ],
+  [
+   "Wannabe",
+   "Spice Girls",
+   "90s & 00s Pop"
+  ],
+  [
+   "Say You'll Be There",
+   "Spice Girls",
+   "90s & 00s Pop"
+  ],
+  [
+   "Spice Up Your Life",
+   "Spice Girls",
+   "90s & 00s Pop"
+  ],
+  [
+   "Stop",
+   "Spice Girls",
+   "90s & 00s Pop"
+  ],
+  [
+   "Viva Forever",
+   "Spice Girls",
+   "90s & 00s Pop"
+  ],
+  [
+   "Goodbye",
+   "Spice Girls",
+   "90s & 00s Pop"
+  ],
+  [
+   "...Baby One More Time",
+   "Britney Spears",
+   "90s & 00s Pop"
+  ],
+  [
+   "Oops!...I Did It Again",
+   "Britney Spears",
+   "90s & 00s Pop"
+  ],
+  [
+   "Sometimes",
+   "Britney Spears",
+   "90s & 00s Pop"
+  ],
+  [
+   "Lucky",
+   "Britney Spears",
+   "90s & 00s Pop"
+  ],
+  [
+   "(You Drive Me) Crazy",
+   "Britney Spears",
+   "90s & 00s Pop"
+  ],
+  [
+   "Reach",
+   "S Club 7",
+   "90s & 00s Pop"
+  ],
+  [
+   "Don't Stop Movin'",
+   "S Club 7",
+   "90s & 00s Pop"
+  ],
+  [
+   "Never Had a Dream Come True",
+   "S Club 7",
+   "90s & 00s Pop"
+  ],
+  [
+   "Tragedy",
+   "Steps",
+   "90s & 00s Pop"
+  ],
+  [
+   "5,6,7,8",
+   "Steps",
+   "90s & 00s Pop"
+  ],
+  [
+   "Barbie Girl",
+   "Aqua",
+   "90s & 00s Pop"
+  ],
+  [
+   "Doctor Jones",
+   "Aqua",
+   "90s & 00s Pop"
+  ],
+  [
+   "Livin' la Vida Loca",
+   "Ricky Martin",
+   "90s & 00s Pop"
+  ],
+  [
+   "Candy",
+   "Mandy Moore",
+   "90s & 00s Pop"
+  ],
+  [
+   "So Yesterday",
+   "Hilary Duff",
+   "90s & 00s Pop"
+  ],
+  [
+   "Come Clean",
+   "Hilary Duff",
+   "90s & 00s Pop"
+  ],
+  [
+   "What Dreams Are Made Of",
+   "Hilary Duff",
+   "90s & 00s Pop"
+  ],
+  [
+   "Complicated",
+   "Avril Lavigne",
+   "90s & 00s Pop"
+  ],
+  [
+   "Sk8er Boi",
+   "Avril Lavigne",
+   "90s & 00s Pop"
+  ],
+  [
+   "Since U Been Gone",
+   "Kelly Clarkson",
+   "90s & 00s Pop"
+  ],
+  [
+   "Breakaway",
+   "Kelly Clarkson",
+   "90s & 00s Pop"
+  ],
+  [
+   "Miss Independent",
+   "Kelly Clarkson",
+   "90s & 00s Pop"
+  ],
+  [
+   "Stronger (What Doesn't Kill You)",
+   "Kelly Clarkson",
+   "90s & 00s Pop"
+  ],
+  [
+   "My Heart Will Go On",
+   "Celine Dion",
+   "90s & 00s Pop"
+  ],
+  [
+   "I Wanna Dance with Somebody (Who Loves Me)",
+   "Whitney Houston",
+   "90s & 00s Pop"
+  ],
+  [
+   "Man! I Feel Like a Woman!",
+   "Shania Twain",
+   "90s & 00s Pop"
+  ],
+  [
+   "You're Still the One",
+   "Shania Twain",
+   "90s & 00s Pop"
+  ],
+  [
+   "Believe",
+   "Cher",
+   "90s & 00s Pop"
+  ],
+  [
+   "Angels",
+   "Robbie Williams",
+   "90s & 00s Pop"
+  ],
+  [
+   "Feel",
+   "Robbie Williams",
+   "90s & 00s Pop"
+  ],
+  [
+   "Lemon Tree",
+   "Fool's Garden",
+   "90s & 00s Pop"
+  ],
+  [
+   "Unwritten",
+   "Natasha Bedingfield",
+   "90s & 00s Pop"
+  ],
+  [
+   "Pocketful of Sunshine",
+   "Natasha Bedingfield",
+   "90s & 00s Pop"
+  ],
+  [
+   "The Climb",
+   "Miley Cyrus",
+   "90s & 00s Pop"
+  ],
+  [
+   "Party in the U.S.A.",
+   "Miley Cyrus",
+   "90s & 00s Pop"
+  ],
+  [
+   "Flowers",
+   "Miley Cyrus",
+   "90s & 00s Pop"
+  ],
+  [
+   "Waka Waka (This Time for Africa)",
+   "Shakira",
+   "90s & 00s Pop"
+  ],
+  [
+   "Wavin' Flag",
+   "K'NAAN",
+   "90s & 00s Pop"
+  ],
+  [
+   "Love Story",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "You Belong With Me",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Shake It Off",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Blank Space",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "22",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Fearless",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Mine",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Our Song",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "We Are Never Ever Getting Back Together",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Style",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "ME!",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Anti-Hero",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Cardigan",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Levitating",
+   "Dua Lipa",
+   "Pop Today"
+  ],
+  [
+   "Don't Start Now",
+   "Dua Lipa",
+   "Pop Today"
+  ],
+  [
+   "As It Was",
+   "Harry Styles",
+   "Pop Today"
+  ],
+  [
+   "Perfect",
+   "Ed Sheeran",
+   "Pop Today"
+  ],
+  [
+   "Shape of You",
+   "Ed Sheeran",
+   "Pop Today"
+  ],
+  [
+   "Photograph",
+   "Ed Sheeran",
+   "Pop Today"
+  ],
+  [
+   "Thinking Out Loud",
+   "Ed Sheeran",
+   "Pop Today"
+  ],
+  [
+   "Bad Habits",
+   "Ed Sheeran",
+   "Pop Today"
+  ],
+  [
+   "Shivers",
+   "Ed Sheeran",
+   "Pop Today"
+  ],
+  [
+   "Just the Way You Are",
+   "Bruno Mars",
+   "Pop Today"
+  ],
+  [
+   "Count on Me",
+   "Bruno Mars",
+   "Pop Today"
+  ],
+  [
+   "Treasure",
+   "Bruno Mars",
+   "Pop Today"
+  ],
+  [
+   "Uptown Funk",
+   "Mark Ronson",
+   "Pop Today"
+  ],
+  [
+   "Firework",
+   "Katy Perry",
+   "Pop Today"
+  ],
+  [
+   "Roar",
+   "Katy Perry",
+   "Pop Today"
+  ],
+  [
+   "Happy",
+   "Pharrell Williams",
+   "Pop Today"
+  ],
+  [
+   "Can't Stop the Feeling!",
+   "Justin Timberlake",
+   "Pop Today"
+  ],
+  [
+   "Brave",
+   "Sara Bareilles",
+   "Pop Today"
+  ],
+  [
+   "Fight Song",
+   "Rachel Platten",
+   "Pop Today"
+  ],
+  [
+   "Hey, Soul Sister",
+   "Train",
+   "Pop Today"
+  ],
+  [
+   "I'm Yours",
+   "Jason Mraz",
+   "Pop Today"
+  ],
+  [
+   "Counting Stars",
+   "OneRepublic",
+   "Pop Today"
+  ],
+  [
+   "Riptide",
+   "Vance Joy",
+   "Pop Today"
+  ],
+  [
+   "Let Her Go",
+   "Passenger",
+   "Pop Today"
+  ],
+  [
+   "Hall of Fame",
+   "The Script",
+   "Pop Today"
+  ],
+  [
+   "Shut Up and Dance",
+   "WALK THE MOON",
+   "Pop Today"
+  ],
+  [
+   "Sugar",
+   "Maroon 5",
+   "Pop Today"
+  ],
+  [
+   "Memories",
+   "Maroon 5",
+   "Pop Today"
+  ],
+  [
+   "Dance Monkey",
+   "Tones And I",
+   "Pop Today"
+  ],
+  [
+   "Heat Waves",
+   "Glass Animals",
+   "Pop Today"
+  ],
+  [
+   "Blinding Lights",
+   "The Weeknd",
+   "Pop Today"
+  ],
+  [
+   "Birds of a Feather",
+   "Billie Eilish",
+   "Pop Today"
+  ],
+  [
+   "What Was I Made For?",
+   "Billie Eilish",
+   "Pop Today"
+  ],
+  [
+   "Salt",
+   "Ava Max",
+   "Pop Today"
+  ],
+  [
+   "Kings & Queens",
+   "Ava Max",
+   "Pop Today"
+  ],
+  [
+   "Viva La Vida",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "Yellow",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "A Sky Full of Stars",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "Fix You",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "Paradise",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "Adventure of a Lifetime",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "The Scientist",
+   "Coldplay",
+   "Pop Today"
+  ],
+  [
+   "Believer",
+   "Imagine Dragons",
+   "Pop Today"
+  ],
+  [
+   "Thunder",
+   "Imagine Dragons",
+   "Pop Today"
+  ],
+  [
+   "Radioactive",
+   "Imagine Dragons",
+   "Pop Today"
+  ],
+  [
+   "Demons",
+   "Imagine Dragons",
+   "Pop Today"
+  ],
+  [
+   "On Top of the World",
+   "Imagine Dragons",
+   "Pop Today"
+  ],
+  [
+   "Imagine",
+   "John Lennon",
+   "Classics"
+  ],
+  [
+   "Dancing Queen",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Mamma Mia",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Waterloo",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Thank You for the Music",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Money, Money, Money",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Fernando",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Take a Chance on Me",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Super Trouper",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Chiquitita",
+   "ABBA",
+   "Classics"
+  ],
+  [
+   "Don't Stop Me Now",
+   "Queen",
+   "Classics"
+  ],
+  [
+   "We Are the Champions",
+   "Queen",
+   "Classics"
+  ],
+  [
+   "We Will Rock You",
+   "Queen",
+   "Classics"
+  ],
+  [
+   "Bohemian Rhapsody",
+   "Queen",
+   "Classics"
+  ],
+  [
+   "I Want to Break Free",
+   "Queen",
+   "Classics"
+  ],
+  [
+   "Hey Jude",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Here Comes the Sun",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Yellow Submarine",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "All You Need Is Love",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Help!",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Let It Be",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Yesterday",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Ob-La-Di, Ob-La-Da",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "What a Wonderful World",
+   "Louis Armstrong",
+   "Classics"
+  ],
+  [
+   "ABC",
+   "The Jackson 5",
+   "Classics"
+  ],
+  [
+   "Man in the Mirror",
+   "Michael Jackson",
+   "Classics"
+  ],
+  [
+   "Heal the World",
+   "Michael Jackson",
+   "Classics"
+  ],
+  [
+   "We Are the World",
+   "USA for Africa",
+   "Classics"
+  ],
+  [
+   "Africa",
+   "TOTO",
+   "Classics"
+  ],
+  [
+   "Take On Me",
+   "a-ha",
+   "Classics"
+  ],
+  [
+   "Girls Just Want to Have Fun",
+   "Cyndi Lauper",
+   "Classics"
+  ],
+  [
+   "True Colors",
+   "Cyndi Lauper",
+   "Classics"
+  ],
+  [
+   "Time After Time",
+   "Cyndi Lauper",
+   "Classics"
+  ],
+  [
+   "Don't Stop Believin'",
+   "Journey",
+   "Classics"
+  ],
+  [
+   "It's My Life",
+   "Bon Jovi",
+   "Classics"
+  ],
+  [
+   "Livin' on a Prayer",
+   "Bon Jovi",
+   "Classics"
+  ],
+  [
+   "Eye of the Tiger",
+   "Survivor",
+   "Classics"
+  ],
+  [
+   "The Final Countdown",
+   "Europe",
+   "Classics"
+  ],
+  [
+   "Bridge Over Troubled Water",
+   "Simon & Garfunkel",
+   "Classics"
+  ],
+  [
+   "Ain't No Mountain High Enough",
+   "Marvin Gaye",
+   "Classics"
+  ],
+  [
+   "Take Me Home, Country Roads",
+   "John Denver",
+   "Classics"
+  ],
+  [
+   "Moon River",
+   "Audrey Hepburn",
+   "Classics"
+  ],
+  [
+   "Proud Mary",
+   "Creedence Clearwater Revival",
+   "Classics"
+  ],
+  [
+   "Walking on Sunshine",
+   "Katrina & The Waves",
+   "Classics"
+  ],
+  [
+   "All Star",
+   "Smash Mouth",
+   "Classics"
+  ],
+  [
+   "I'm a Believer",
+   "Smash Mouth",
+   "Classics"
+  ],
+  [
+   "Sweet Caroline",
+   "Neil Diamond",
+   "Classics"
+  ],
+  [
+   "Stand by Me",
+   "Ben E. King",
+   "Classics"
+  ],
+  [
+   "Lean on Me",
+   "Bill Withers",
+   "Classics"
+  ],
+  [
+   "Three Little Birds",
+   "Bob Marley & The Wailers",
+   "Classics"
+  ],
+  [
+   "Wonderful World",
+   "Sam Cooke",
+   "Classics"
+  ],
+  [
+   "Sgt. Pepper's Lonely Hearts Club Band",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "It's Not Unusual",
+   "Tom Jones",
+   "Classics"
+  ],
+  [
+   "Swinging on a Star",
+   "Bing Crosby",
+   "Classics"
+  ],
+  [
+   "Journey to the Past",
+   "Liz Callaway",
+   "Disney"
+  ],
+  [
+   "Once Upon a December",
+   "Liz Callaway",
+   "Disney"
+  ],
+  [
+   "Englishman in New York",
+   "Sting",
+   "Classics"
+  ],
+  [
+   "Love Me for a Reason",
+   "Boyzone",
+   "Boy Bands"
+  ],
+  [
+   "Rather Be",
+   "Clean Bandit",
+   "Pop Today"
+  ],
+  [
+   "When I'm Sixty-Four",
+   "The Beatles",
+   "Classics"
+  ],
+  [
+   "Fabulous",
+   "Ashley Tisdale",
+   "Disney"
+  ],
+  [
+   "School Song",
+   "Matilda the Musical",
+   "Musicals"
+  ],
+  [
+   "According to You",
+   "Orianthi",
+   "Pop Today"
+  ],
+  [
+   "The Last Great American Dynasty",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Mine",
+   "Mel Gibson",
+   "Disney"
+  ],
+  [
+   "Get Back Up Again",
+   "Anna Kendrick",
+   "Disney"
+  ],
+  [
+   "Frozen Heart",
+   "Cast - Frozen",
+   "Disney"
+  ],
+  [
+   "Whatever It Takes",
+   "Imagine Dragons",
+   "Pop Today"
+  ],
+  [
+   "I Am Moana",
+   "Auli'i Cravalho",
+   "Disney"
+  ],
+  [
+   "Where You Are",
+   "Christopher Jackson",
+   "Disney"
+  ],
+  [
+   "Wake Me Up",
+   "Avicii",
+   "Pop Today"
+  ],
+  [
+   "Welcome To New York",
+   "Taylor Swift",
+   "Pop Today"
+  ],
+  [
+   "Poor Unfortunate Souls",
+   "Pat Carroll",
+   "Disney"
+  ],
+  [
+   "The Lonely Goatherd",
+   "Julie Andrews",
+   "Musicals"
+  ],
+  [
+   "Thank Goodness",
+   "Kristin Chenoweth",
+   "Musicals"
+  ],
+  [
+   "Boyfriend",
+   "Big Time Rush",
+   "Boy Bands"
+  ],
+  [
+   "Over the Rainbow",
+   "Judy Garland",
+   "Musicals"
+  ],
+  [
+   "Lemon Tree",
+   "Peter, Paul and Mary",
+   "Classics"
+  ],
+  [
+   "Determinate",
+   "Lemonade Mouth",
+   "Disney"
+  ],
+  [
+   "Cool",
+   "Jonas Brothers",
+   "Boy Bands"
+  ],
+  [
+   "The Lazy Song",
+   "Bruno Mars",
+   "Pop Today"
+  ],
+  [
+   "What About Now",
+   "Westlife",
+   "Boy Bands"
+  ],
+  [
+   "10,000 Promises",
+   "Backstreet Boys",
+   "Boy Bands"
+  ],
+  [
+   "Gotta Go My Own Way",
+   "Vanessa Hudgens",
+   "Disney"
+  ],
+  [
+   "Ways to Be Wicked",
+   "Dove Cameron",
+   "Disney"
+  ],
+  [
+   "Crocodile Rock",
+   "Elton John",
+   "Classics"
+  ],
+  [
+   "Danger Zone",
+   "Kenny Loggins",
+   "Classics"
+  ],
+  [
+   "Adore You",
+   "Harry Styles",
+   "Pop Today"
+  ],
+  [
+   "Eyes Closed",
+   "Ed Sheeran",
+   "Pop Today"
+  ]
+ ]
+}

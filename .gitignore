@@ -1,0 +1,5 @@
+# full song lyrics downloaded by the build scripts: keep local, never publish
+data/.cache/
+.claude/
+.DS_Store
+node_modules/
