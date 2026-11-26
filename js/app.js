@@ -1,7 +1,7 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795732926";
-import * as sp from "./spotify.js?v=1795732926";
-import * as be from "./backend.js?v=1795732926";
-import { idbGet, idbSet } from "./idb.js?v=1795732926";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795733156";
+import * as sp from "./spotify.js?v=1795733156";
+import * as be from "./backend.js?v=1795733156";
+import { idbGet, idbSet } from "./idb.js?v=1795733156";
 
 // ---------- game settings (easy to tweak) ----------
 const LEVEL_FIRST = 100;       // points needed to finish level 1
@@ -16,8 +16,8 @@ const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before
 
 // ---------- static data: the built-in list and the song corpus ----------
 const [builtinData, corpus] = await Promise.all([
-  fetch("data/words.json?v=1795732926").then((r) => r.json()),
-  fetch("data/index.json?v=1795732926").then((r) => r.json()),
+  fetch("data/words.json?v=1795733156").then((r) => r.json()),
+  fetch("data/index.json?v=1795733156").then((r) => r.json()),
 ]);
 const BUILTIN_ID = "builtin";
 const BUILTIN = {
@@ -519,6 +519,11 @@ function loginView(mode = "in") {
       <div class="login-logo">🎵</div>
       <h1>מילים בשירים</h1>
       <p class="muted">לומדים אוצר מילים באנגלית דרך שירים שאוהבים.</p>
+      ${mode !== "reset" ? `<div class="login-tabs">
+        <button class="login-tab ${mode === "up" ? "on" : ""}" data-mode="up">🆕 פעם ראשונה כאן</button>
+        <button class="login-tab ${mode === "in" ? "on" : ""}" data-mode="in">🔑 כבר יש לי חשבון</button>
+      </div>` : ""}
+      <p class="login-hint">${mode === "up" ? "יוצרים חשבון משפחתי אחד. בוחרים סיסמה חדשה (לפחות 6 תווים), ואחר כך מאשרים את המייל שנשלח." : mode === "reset" ? "נשלח קישור לאיפוס הסיסמה למייל." : "נכנסים עם האימייל והסיסמה של החשבון המשפחתי."}</p>
       <form id="login-form">
         <input id="email" type="email" dir="ltr" placeholder="אימייל של ההורה" autocomplete="email" required>
         ${mode !== "reset" ? `<input id="password" type="password" dir="ltr" placeholder="סיסמה" autocomplete="${mode === "up" ? "new-password" : "current-password"}" minlength="6" required>` : ""}
@@ -526,7 +531,7 @@ function loginView(mode = "in") {
       </form>
       <div id="login-msg"></div>
       <p class="login-links">
-        ${mode === "in" ? `<button class="link-btn" data-mode="up">אין לכם חשבון? הרשמה</button> · <button class="link-btn" data-mode="reset">שכחתי סיסמה</button>` : `<button class="link-btn" data-mode="in">כבר יש חשבון? כניסה</button>`}
+        ${mode === "in" ? `<button class="link-btn" data-mode="reset">שכחתי סיסמה</button>` : mode === "reset" ? `<button class="link-btn" data-mode="in">חזרה לכניסה</button>` : ""}
       </p>
       <p class="muted small">חשבון אחד לכל המשפחה. הילדים הם פרופילים בתוך החשבון, בלי אימייל משלהם.</p>
     </section>`;
@@ -552,7 +557,8 @@ function loginView(mode = "in") {
     } catch (err) {
       btn.disabled = false;
       const m = err.message || "";
-      msg.innerHTML = `<p class="err">${/invalid login/i.test(m) ? "האימייל או הסיסמה לא נכונים" : /not confirmed/i.test(m) ? "צריך קודם לאשר את המייל (בדקו את תיבת הדואר)" : /already registered/i.test(m) ? "כבר יש חשבון עם האימייל הזה" : esc(m)}</p>`;
+      msg.innerHTML = `<p class="err">${/invalid login/i.test(m) ? `האימייל או הסיסמה לא נכונים. אם זו הפעם הראשונה שלכם כאן, צריך קודם <button class="link-btn" data-mode="up">ליצור חשבון</button>.` : /not confirmed/i.test(m) ? "צריך קודם לאשר את המייל (בדקו את תיבת הדואר)" : /already registered/i.test(m) ? "כבר יש חשבון עם האימייל הזה. נסו להיכנס." : /rate limit/i.test(m) ? "נשלחו יותר מדי מיילים. נסו שוב בעוד שעה." : /password/i.test(m) ? "הסיסמה צריכה להיות לפחות 6 תווים" : esc(m)}</p>`;
+      msg.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => loginView(b.dataset.mode)));
     }
   });
 }
@@ -1476,7 +1482,7 @@ async function render() {
   setPlaying(null);
   window.scrollTo(0, 0);
   if (!be.configured) { app.innerHTML = `<div class="empty">האפליקציה עוד לא מחוברת לשרת.</div>`; return; }
-  if (!user) { loginView(); return; }
+  if (!user) { loginView(localStorage.getItem("vk.everSignedIn") ? "in" : "up"); return; }
   if (!profileId) { pickProfileView(); return; }
   const parts = location.hash.replace(/^#\/?/, "").split("/");
   try {
@@ -1506,6 +1512,7 @@ async function render() {
 async function start() {
   const s = await be.session();
   user = s?.user || null;
+  if (user) localStorage.setItem("vk.everSignedIn", "1");
   if (user) {
     app.innerHTML = `<p class="loading">טוען…</p>`;
     try { await loadFamilyData(); }
