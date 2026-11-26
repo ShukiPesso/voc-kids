@@ -10,6 +10,7 @@ const PTS_GAME = 2;            // correct answer in the song game
 const SECS_PER_LISTEN_PT = 2;  // 1 point for every 2 seconds of song listened
 const LISTEN_REPEATS_PER_DAY = 2; // the same snippet earns listening points up to twice a day
 const SNIPPET_TAIL_MS = 2500;  // keep playing this long after the line ends, so a word at the end of the line isn't cut off
+const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before / after a snippet
 
 // ---------- data ----------
 const [wordsData, indexData] = await Promise.all([
@@ -53,6 +54,9 @@ const store = {
   get: (k, d) => JSON.parse(localStorage.getItem(k) || "null") ?? d,
   set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
 };
+
+// Extra seconds the user chose to hear before / after each snippet (per device).
+let audioPrefs = store.get("vk.audio", { before: 0, after: 0 });
 
 // Songs imported from Spotify (playlists, searches) live in localStorage.
 let custom = store.get("vk.custom", { songs: [], hits: {}, seen: [] });
@@ -209,12 +213,14 @@ async function playHit(hit, btn, wordKey = "") {
   try {
     const track = await sp.findTrack(hit.song);
     if (!track) { setPlaying(null); toast("לא מצאנו את השיר הזה בספוטיפיי 🤷"); return; }
-    const end = hit.end + SNIPPET_TAIL_MS;
-    await sp.playSnippet(track.uri, hit.start, end, () => {
+    const start = Math.max(0, hit.start - audioPrefs.before * 1000);
+    const end = hit.end + SNIPPET_TAIL_MS + audioPrefs.after * 1000;
+    await sp.playSnippet(track.uri, start, end, () => {
       finishListening();
       if (playingBtn === btn) setPlaying(null);
     });
-    listening = { key: `${wordKey}|${songKey(hit.song)}`, t0: Date.now(), maxMs: end - hit.start, btn };
+    // listening points count the regular snippet length, so extra seconds don't inflate them
+    listening = { key: `${wordKey}|${songKey(hit.song)}`, t0: Date.now(), maxMs: hit.end + SNIPPET_TAIL_MS - hit.start, btn };
   } catch (e) { setPlaying(null); playError(e); }
 }
 function setPlaying(btn) {
@@ -720,6 +726,20 @@ function settingsView() {
     </section>
 
     <section class="panel">
+      <h2>🔊 אורך הקטע</h2>
+      <p class="muted">רוצים לשמוע יותר מהשיר? מוסיפים שניות לפני הקטע ואחריו.</p>
+      ${[["before", "שניות לפני"], ["after", "שניות אחרי"]].map(([k, label]) => `
+        <div class="stepper-row">
+          <span>${label}</span>
+          <div class="stepper" dir="ltr">
+            <button class="step" data-k="${k}" data-d="-1" aria-label="פחות">−</button>
+            <span class="step-val" id="val-${k}">${audioPrefs[k]}</span>
+            <button class="step" data-k="${k}" data-d="1" aria-label="יותר">+</button>
+          </div>
+        </div>`).join("")}
+    </section>
+
+    <section class="panel">
       <h2>🎧 ספוטיפיי</h2>
       ${!cid ? `
         <p>חד-פעמי, להורה: צריך ליצור "אפליקציה" בחשבון המפתחים של ספוטיפיי (חינם, 2 דקות):</p>
@@ -764,6 +784,12 @@ function settingsView() {
       <div class="row wrap"><button id="backup-dl" class="big-btn small">הורדת גיבוי</button><label class="ghost">טעינת גיבוי<input type="file" id="backup-ul" accept=".json,application/json" hidden></label></div>
     </section>`;
 
+  app.querySelectorAll(".step").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.k;
+    audioPrefs[k] = Math.min(EXTRA_MAX_SECS, Math.max(0, audioPrefs[k] + +b.dataset.d));
+    store.set("vk.audio", audioPrefs);
+    $(`#val-${k}`).textContent = audioPrefs[k];
+  }));
   app.querySelectorAll("[data-award]").forEach((c) => c.addEventListener("change", () => { game.awards[+c.dataset.award].given = c.checked; saveGame(); render(); }));
   $("#save-cid")?.addEventListener("click", () => { const v = $("#cid").value.trim(); if (v) { sp.setClientId(v); render(); } });
   $("#reset-cid")?.addEventListener("click", () => { sp.logout(); localStorage.removeItem("vk.spotify.clientId"); render(); });
