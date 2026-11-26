@@ -183,3 +183,9 @@ a.ghost { text-decoration: none; }
 .step { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--line); background: white; font: inherit; font-size: 1.3rem; cursor: pointer; color: var(--accent); }
 .step:hover { border-color: var(--accent); }
 .step-val { min-width: 2ch; text-align: center; font-weight: 800; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.gear { font-size: 1.4rem; width: 44px; height: 44px; display: grid; place-items: center; background: var(--card); border-radius: 50%; text-decoration: none; box-shadow: 0 2px 8px #0001; position: relative; transition: transform 0.3s; }
+.gear:hover { transform: rotate(60deg); }
+.gear.attention::after { content: ""; position: absolute; top: 4px; right: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-2); border: 2px solid white; }
+.page-title { font-size: 1.6rem; margin: 0 4px 10px; }
+.settings-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.panel { scroll-margin-top: 16px; }

@@ -1,21 +1,21 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics } from "../lib/matcher.js";
-import * as sp from "./spotify.js";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics } from "../lib/matcher.js?v=1795730891";
+import * as sp from "./spotify.js?v=1795730891";
 
 // ---------- game settings (easy to tweak) ----------
-const LEVEL_FIRST = 50;        // points needed to finish level 1
-const LEVEL_STEP = 25;         // each next level needs this many more points (50, 75, 100, ...)
-const PTS_EXAM = 5;            // correct answer in the exam
-const PTS_EXAM_SPELL = 10;     // correct spelling in the exam
+const LEVEL_FIRST = 100;       // points needed to finish level 1
+const LEVEL_STEP = 25;         // each next level needs this many more points (100, 125, 150, ...)
+const PTS_EXAM = 2;            // correct answer in the exam (any question type)
 const PTS_GAME = 2;            // correct answer in the song game
-const SECS_PER_LISTEN_PT = 2;  // 1 point for every 2 seconds of song listened
-const LISTEN_REPEATS_PER_DAY = 2; // the same snippet earns listening points up to twice a day
+const PTS_LISTEN = 1;          // playing a song snippet
+const LISTEN_MIN_SECS = 3;     // a play counts once it has played this long (or reached its end)
+const LISTEN_REPEATS_PER_DAY = 2; // the same snippet earns the listening point up to twice a day
 const SNIPPET_TAIL_MS = 2500;  // keep playing this long after the line ends, so a word at the end of the line isn't cut off
 const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before / after a snippet
 
 // ---------- data ----------
 const [wordsData, indexData] = await Promise.all([
-  fetch("data/words.json").then((r) => r.json()),
-  fetch("data/index.json").then((r) => r.json()),
+  fetch("data/words.json?v=1795730891").then((r) => r.json()),
+  fetch("data/index.json?v=1795730891").then((r) => r.json()),
 ]);
 const list = wordsData.lists[0];
 const WORDS = list.words.map((w) => ({ ...w, id: wordId(w) }));
@@ -119,7 +119,7 @@ function addPoints(n, anchor, icon = "⭐") {
   const before = levelInfo(game.points).lvl;
   game.points += n;
   const after = levelInfo(game.points).lvl;
-  for (let l = before + 1; l <= after; l++) game.awards.push({ level: l, date: new Date().toISOString().slice(0, 10), given: false });
+  for (let l = before + 1; l <= after; l++) if (!game.awards.some((a) => a.level === l)) game.awards.push({ level: l, date: new Date().toISOString().slice(0, 10), given: false });
   saveGame();
   floatPoints(`+${n} ${icon}`, anchor);
   updateScoreBar();
@@ -191,18 +191,17 @@ function playError(e) {
 let playingBtn = null;
 let listening = null; // { key, t0, maxMs, btn }
 
-function finishListening() {
+function finishListening(reachedEnd = false) {
   if (!listening) return;
-  const { key, t0, maxMs, btn } = listening;
+  const { key, t0, btn } = listening;
   listening = null;
-  const secs = Math.min(Date.now() - t0, maxMs) / 1000;
+  if (!reachedEnd && Date.now() - t0 < LISTEN_MIN_SECS * 1000) return;
   const day = new Date().toISOString().slice(0, 10);
   if (!game.listen[day]) game.listen = { [day]: {} }; // keep only today
   const count = game.listen[day][key] || 0;
-  const pts = Math.floor(secs / SECS_PER_LISTEN_PT);
-  if (count >= LISTEN_REPEATS_PER_DAY || pts <= 0) return;
+  if (count >= LISTEN_REPEATS_PER_DAY) return;
   game.listen[day][key] = count + 1;
-  addPoints(pts, btn, "🎧");
+  addPoints(PTS_LISTEN, btn, "🎧");
 }
 
 async function playHit(hit, btn, wordKey = "") {
@@ -216,11 +215,10 @@ async function playHit(hit, btn, wordKey = "") {
     const start = Math.max(0, hit.start - audioPrefs.before * 1000);
     const end = hit.end + SNIPPET_TAIL_MS + audioPrefs.after * 1000;
     await sp.playSnippet(track.uri, start, end, () => {
-      finishListening();
+      finishListening(true);
       if (playingBtn === btn) setPlaying(null);
     });
-    // listening points count the regular snippet length, so extra seconds don't inflate them
-    listening = { key: `${wordKey}|${songKey(hit.song)}`, t0: Date.now(), maxMs: hit.end + SNIPPET_TAIL_MS - hit.start, btn };
+    listening = { key: `${wordKey}|${songKey(hit.song)}`, t0: Date.now(), btn };
   } catch (e) { setPlaying(null); playError(e); }
 }
 function setPlaying(btn) {
@@ -296,10 +294,10 @@ const songHasWord = (uri, id) => {
 // ---------- views ----------
 function scoreBar() {
   const { lvl, into, need } = levelInfo(game.points);
-  return `<a id="score" class="score" href="#/settings" title="${game.points} נקודות בסך הכל">
+  return `<div id="score" class="score" title="${game.points} נקודות בסך הכל">
     <span class="lvl">שלב ${lvl}</span>
     <span class="bar"><span style="width:${(100 * into) / need}%"></span></span>
-    <span class="pts">${into}/${need}</span></a>`;
+    <span class="pts">${into}/${need}</span></div>`;
 }
 function updateScoreBar() { const el = $("#score"); if (el) el.outerHTML = scoreBar(); }
 
@@ -311,7 +309,7 @@ function header(back) {
     <div class="top-actions">
       ${scoreBar()}
       ${profiles.length ? `<button class="chip" id="switch-profile">${esc(prof?.emoji || "🙂")} ${esc(prof?.name || "")}</button>` : ""}
-      <a class="chip ${sp.isLoggedIn() ? "ok" : "warn"}" href="#/settings">${sp.isLoggedIn() ? "🟢" : "⚪ חיבור ספוטיפיי"}</a>
+      <a class="gear ${sp.isLoggedIn() ? "" : "attention"}" href="#/settings" title="הגדרות" aria-label="הגדרות">⚙️</a>
     </div>
   </header>`;
 }
@@ -603,7 +601,7 @@ function examView() {
     ${header(true)}
     <section class="exam-start panel">
       <h2>📝 בחינה על המילים</h2>
-      <p>כל תשובה נכונה שווה <b>${PTS_EXAM} נקודות</b>, ואיות נכון שווה <b>${PTS_EXAM_SPELL} נקודות</b>!</p>
+      <p>כל תשובה נכונה שווה <b>${PTS_EXAM} נקודות</b>!</p>
       <p class="muted">יש שלושה סוגי שאלות: לתרגם לעברית, לבחור את המילה באנגלית, ולכתוב את המילה באנגלית (איות).</p>
       <label class="known-toggle"><input type="checkbox" id="with-spell" checked> כולל שאלות איות</label>
       <div class="exam-sizes">
@@ -646,7 +644,7 @@ function runExam(count, withSpell) {
       recordAnswer(w.id, right);
       if (right) {
         state.correct++;
-        const pts = type === "spell" ? PTS_EXAM_SPELL : PTS_EXAM;
+        const pts = PTS_EXAM;
         state.earned += pts;
         addPoints(pts, anchor);
       } else state.mistakes.push(w);
@@ -714,32 +712,19 @@ function settingsView() {
   const { lvl } = levelInfo(game.points);
   app.innerHTML = `
     ${header(true)}
-    <section class="panel">
-      <h2>🏆 נקודות ומתנות${currentProfile() ? ` · ${esc(currentProfile().name)}` : ""}</h2>
-      <p>שלב <b>${lvl}</b> · <b>${game.points}</b> נקודות בסך הכל.</p>
-      <p class="muted">איך מרוויחים נקודות: נקודה על כל ${SECS_PER_LISTEN_PT} שניות של שמיעת שיר, ${PTS_EXAM} על כל תשובה נכונה בבחינה (${PTS_EXAM_SPELL} על איות), ו-${PTS_GAME} על תשובה נכונה במשחק השירים. שלב 1 דורש ${LEVEL_FIRST} נקודות, וכל שלב אחריו דורש ${LEVEL_STEP} נקודות יותר מהקודם.</p>
-      ${game.awards.length ? `
-        <h3>🎁 מתנות (להורים)</h3>
-        <div class="awards">${game.awards.map((a, i) => `
-          <label class="award ${a.given ? "given" : ""}"><input type="checkbox" data-award="${i}" ${a.given ? "checked" : ""}> שלב ${a.level} · ${esc(a.date)} · ${a.given ? "המתנה ניתנה ✓" : "מחכה למתנה 🎁"}</label>`).join("")}
-        </div>` : `<p class="muted">עוד לא עברו שלב. בהצלחה! 🍀</p>`}
+    <h1 class="page-title">⚙️ הגדרות</h1>
+    <nav class="settings-nav">
+      ${[["set-profiles", "👧 מי לומדת"], ["set-spotify", `🎧 ספוטיפיי${sp.isLoggedIn() ? "" : " ⚠️"}`], ["set-audio", "🔊 אורך הקטע"], ["set-songs", "📀 השירים שלנו"], ["set-points", "🏆 נקודות ומתנות"], ["set-backup", "💾 גיבוי"]]
+        .map(([id, label]) => `<button class="chip" data-goto="${id}">${label}</button>`).join("")}
+    </nav>
+    <section class="panel" id="set-profiles">
+      <h2>👧 מי לומדת?</h2>
+      <p class="muted">לכל אחת נקודות, שלבים, סדר שירים והתקדמות משלה.</p>
+      <div class="row wrap">${profiles.map((p) => `<button class="chip ${p.id === profileId ? "ok" : ""}" data-prof="${p.id}">${esc(p.emoji)} ${esc(p.name)}</button>`).join("")}</div>
+      <div class="row"><input id="prof-name" placeholder="שם"><button id="prof-add" class="big-btn small">הוספה</button></div>
     </section>
 
-    <section class="panel">
-      <h2>🔊 אורך הקטע</h2>
-      <p class="muted">רוצים לשמוע יותר מהשיר? מוסיפים שניות לפני הקטע ואחריו.</p>
-      ${[["before", "שניות לפני"], ["after", "שניות אחרי"]].map(([k, label]) => `
-        <div class="stepper-row">
-          <span>${label}</span>
-          <div class="stepper" dir="ltr">
-            <button class="step" data-k="${k}" data-d="-1" aria-label="פחות">−</button>
-            <span class="step-val" id="val-${k}">${audioPrefs[k]}</span>
-            <button class="step" data-k="${k}" data-d="1" aria-label="יותר">+</button>
-          </div>
-        </div>`).join("")}
-    </section>
-
-    <section class="panel">
+    <section class="panel" id="set-spotify">
       <h2>🎧 ספוטיפיי</h2>
       ${!cid ? `
         <p>חד-פעמי, להורה: צריך ליצור "אפליקציה" בחשבון המפתחים של ספוטיפיי (חינם, 2 דקות):</p>
@@ -761,7 +746,21 @@ function settingsView() {
       <p class="muted">בדפדפן במחשב השיר מתנגן ישר מהדף. בטלפון השיר מתנגן באפליקציית ספוטיפיי, אז היא צריכה להיות פתוחה.</p>
     </section>
 
-    <section class="panel">
+    <section class="panel" id="set-audio">
+      <h2>🔊 אורך הקטע</h2>
+      <p class="muted">רוצים לשמוע יותר מהשיר? מוסיפים שניות לפני הקטע ואחריו.</p>
+      ${[["before", "שניות לפני"], ["after", "שניות אחרי"]].map(([k, label]) => `
+        <div class="stepper-row">
+          <span>${label}</span>
+          <div class="stepper" dir="ltr">
+            <button class="step" data-k="${k}" data-d="-1" aria-label="פחות">−</button>
+            <span class="step-val" id="val-${k}">${audioPrefs[k]}</span>
+            <button class="step" data-k="${k}" data-d="1" aria-label="יותר">+</button>
+          </div>
+        </div>`).join("")}
+    </section>
+
+    <section class="panel" id="set-songs">
       <h2>📀 השירים שלנו</h2>
       <p>נחפש את המילים גם בשירים מהפלייליסטים שלכם. שירים מהספוטיפיי שלכם יופיעו ראשונים.</p>
       ${sp.isLoggedIn() ? `
@@ -771,19 +770,24 @@ function settingsView() {
       <p class="muted">${custom.songs.length} שירים מהספוטיפיי שלכם עם מילים מהרשימה. ${custom.songs.length ? `<button id="clear-custom" class="link">מחיקה</button>` : ""}</p>
     </section>
 
-    <section class="panel">
-      <h2>👧 מי לומדת?</h2>
-      <p class="muted">לכל אחת נקודות, שלבים, סדר שירים והתקדמות משלה.</p>
-      <div class="row wrap">${profiles.map((p) => `<button class="chip ${p.id === profileId ? "ok" : ""}" data-prof="${p.id}">${esc(p.emoji)} ${esc(p.name)}</button>`).join("")}</div>
-      <div class="row"><input id="prof-name" placeholder="שם"><button id="prof-add" class="big-btn small">הוספה</button></div>
+    <section class="panel" id="set-points">
+      <h2>🏆 נקודות ומתנות${currentProfile() ? ` · ${esc(currentProfile().name)}` : ""}</h2>
+      <p>שלב <b>${lvl}</b> · <b>${game.points}</b> נקודות בסך הכל.</p>
+      <p class="muted">איך מרוויחים נקודות: נקודה על כל השמעה של שיר (אותו קטע נותן נקודה עד ${LISTEN_REPEATS_PER_DAY} פעמים ביום), ${PTS_EXAM} נקודות על כל תשובה נכונה בבחינה, ו-${PTS_GAME} על תשובה נכונה במשחק השירים. שלב 1 דורש ${LEVEL_FIRST} נקודות, וכל שלב אחריו דורש ${LEVEL_STEP} נקודות יותר מהקודם.</p>
+      ${game.awards.length ? `
+        <h3>🎁 מתנות (להורים)</h3>
+        <div class="awards">${game.awards.map((a, i) => `
+          <label class="award ${a.given ? "given" : ""}"><input type="checkbox" data-award="${i}" ${a.given ? "checked" : ""}> שלב ${a.level} · ${esc(a.date)} · ${a.given ? "המתנה ניתנה ✓" : "מחכה למתנה 🎁"}</label>`).join("")}
+        </div>` : `<p class="muted">עוד לא עברו שלב. בהצלחה! 🍀</p>`}
     </section>
 
-    <section class="panel">
+    <section class="panel" id="set-backup">
       <h2>💾 גיבוי והעברה בין מכשירים</h2>
       <p class="muted">כל הנתונים (פרופילים, נקודות, שלבים, סדר שירים ושירים שנוספו) נשמרים רק בדפדפן הזה. כדי להעביר אותם למכשיר אחר: מורידים כאן קובץ גיבוי, ופותחים אותו בעמוד הזה במכשיר השני.</p>
       <div class="row wrap"><button id="backup-dl" class="big-btn small">הורדת גיבוי</button><label class="ghost">טעינת גיבוי<input type="file" id="backup-ul" accept=".json,application/json" hidden></label></div>
     </section>`;
 
+  app.querySelectorAll("[data-goto]").forEach((b) => b.addEventListener("click", () => document.getElementById(b.dataset.goto).scrollIntoView({ behavior: "smooth" })));
   app.querySelectorAll(".step").forEach((b) => b.addEventListener("click", () => {
     const k = b.dataset.k;
     audioPrefs[k] = Math.min(EXTRA_MAX_SECS, Math.max(0, audioPrefs[k] + +b.dataset.d));
