@@ -260,3 +260,4 @@ details summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
 .login-tab { border: 0; background: transparent; font: inherit; font-weight: 700; padding: 10px; border-radius: 10px; cursor: pointer; color: var(--muted); }
 .login-tab.on { background: white; color: var(--accent); box-shadow: 0 2px 6px #0001; }
 .login-hint { font-size: 0.9rem; color: var(--muted); margin: 12px 0 0; }
+.picker-account { margin-top: 24px; }

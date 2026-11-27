@@ -1,7 +1,7 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795769309";
-import * as sp from "./spotify.js?v=1795769309";
-import * as be from "./backend.js?v=1795769309";
-import { idbGet, idbSet } from "./idb.js?v=1795769309";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795770015";
+import * as sp from "./spotify.js?v=1795770015";
+import * as be from "./backend.js?v=1795770015";
+import { idbGet, idbSet } from "./idb.js?v=1795770015";
 
 // ---------- game settings (easy to tweak) ----------
 const LEVEL_FIRST = 100;       // points needed to finish level 1
@@ -16,8 +16,8 @@ const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before
 
 // ---------- static data: the built-in list and the song corpus ----------
 const [builtinData, corpus] = await Promise.all([
-  fetch("data/words.json?v=1795769309").then((r) => r.json()),
-  fetch("data/index.json?v=1795769309").then((r) => r.json()),
+  fetch("data/words.json?v=1795770015").then((r) => r.json()),
+  fetch("data/index.json?v=1795770015").then((r) => r.json()),
 ]);
 const BUILTIN_ID = "builtin";
 const BUILTIN = {
@@ -89,11 +89,26 @@ function saveFamilySoon() { later("family", () => be.saveFamily(family).catch(sy
 function saveProfileSoon(pid = profileId) { if (pid) later("p:" + pid, () => be.saveProfile(pid, pstates[pid]).catch(syncError)); }
 function syncError(e) { console.warn(e); toast("לא הצלחנו לשמור. בדקו את החיבור לאינטרנט."); }
 function flushSaves() {
+  const jobs = [];
   for (const [k, t] of Object.entries(timers)) {
     clearTimeout(t); delete timers[k];
-    if (k === "family") be.saveFamily(family).catch(() => {});
-    else be.saveProfile(k.slice(2), pstates[k.slice(2)]).catch(() => {});
+    if (k === "family") jobs.push(be.saveFamily(family).catch(() => {}));
+    else jobs.push(be.saveProfile(k.slice(2), pstates[k.slice(2)]).catch(() => {}));
   }
+  return Promise.all(jobs);
+}
+
+// Leave this family on this device (to sign in to another family or create a new one).
+async function signOutFamily() {
+  if (await ask({ title: "🚪 יציאה מהמשפחה", text: `תצאו מהחשבון <b dir="ltr">${esc(user.email)}</b> במכשיר הזה. כל הנתונים נשמרים בחשבון, ואפשר להיכנס שוב מתי שרוצים. אחרי היציאה אפשר להיכנס למשפחה אחרת או ליצור משפחה חדשה.`, ok: "יציאה" }) === null) return;
+  finishListening();
+  await sp.stop();
+  await flushSaves();
+  sp.logout(); // Spotify belongs to whoever uses this device: connect again after signing in
+  store.set("vk.profile", null);
+  await be.signOut();
+  location.hash = "#/";
+  location.reload();
 }
 addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushSaves(); });
 
@@ -603,7 +618,9 @@ function pickProfileView() {
         ${family.profiles.map((p) => `<button class="picker-card" data-prof="${p.id}"><span class="picker-emoji">${esc(p.emoji)}</span>${esc(p.name)}</button>`).join("")}
       </div>
       <form class="row" id="add-prof"><input id="prof-name" placeholder="${family.profiles.length ? "להוסיף עוד ילד/ה" : "שם הילד/ה"}"><button class="big-btn small">הוספה</button></form>
+      <p class="muted small picker-account">החשבון המשפחתי: <span dir="ltr">${esc(user.email)}</span> · <button class="link-btn" id="signout-picker">🚪 יציאה / משפחה אחרת</button></p>
     </section>`;
+  $("#signout-picker").addEventListener("click", signOutFamily);
   app.querySelectorAll("[data-prof]").forEach((b) => b.addEventListener("click", () => switchProfile(b.dataset.prof)));
   $("#add-prof").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -1343,7 +1360,7 @@ function settingsView() {
     ${header("#/")}
     <h1 class="page-title">⚙️ הגדרות</h1>
     <nav class="settings-nav">
-      ${[["set-profiles", "👧 מי לומדת"], ["set-spotify", `🎧 ספוטיפיי${sp.isLoggedIn() ? "" : " ⚠️"}`], ["set-audio", "🔊 אורך הקטע"], ["set-songs", "📀 השירים שלנו"], ["set-points", "🏆 נקודות ומתנות"], ["set-account", "👤 החשבון"], ...(isAdmin ? [["set-admin", `🛡️ ניהול${pendingCount ? ` (${pendingCount})` : ""}`]] : [])]
+      ${[["set-profiles", "👧 מי לומדת"], ["set-spotify", `🎧 ספוטיפיי${sp.isLoggedIn() ? "" : " ⚠️"}`], ["set-audio", "🔊 אורך הקטע"], ["set-songs", "📀 השירים שלנו"], ["set-points", "🏆 נקודות ומתנות"], ["set-account", "👤 החשבון · יציאה"], ...(isAdmin ? [["set-admin", `🛡️ ניהול${pendingCount ? ` (${pendingCount})` : ""}`]] : [])]
         .map(([id, label]) => `<button class="chip" data-goto="${id}">${label}</button>`).join("")}
     </nav>
 
@@ -1406,7 +1423,8 @@ function settingsView() {
       <h2>👤 החשבון המשפחתי</h2>
       <p>מחוברים בתור <b dir="ltr">${esc(user.email)}</b></p>
       <label class="field">שם המשפחה (יוצג כשמשתפים תיקייה עם כולם)<input id="fam-name" value="${esc(family.familyName || "")}" placeholder="למשל: משפחת כהן"></label>
-      <div class="row"><button id="logout" class="ghost">יציאה מהחשבון</button></div>
+      <div class="row"><button id="logout" class="big-btn small">🚪 יציאה מהמשפחה</button></div>
+      <p class="muted small">אחרי היציאה אפשר להיכנס לחשבון של משפחה אחרת, או ליצור משפחה חדשה ("פעם ראשונה כאן").</p>
       <p id="admin-claim"></p>
     </section>
 
@@ -1440,7 +1458,7 @@ function settingsView() {
   $("#logout-sp")?.addEventListener("click", () => { sp.logout(); render(); });
   $("#clear-custom")?.addEventListener("click", () => { family.customSongs = []; saveFamilySoon(); customHits = {}; render(); });
   $("#fam-name").addEventListener("change", (e) => { family.familyName = e.target.value.trim(); saveFamilySoon(); toast("נשמר ✓"); });
-  $("#logout").addEventListener("click", async () => { flushSaves(); store.set("vk.profile", null); await be.signOut(); location.hash = "#/"; location.reload(); });
+  $("#logout").addEventListener("click", signOutFamily);
   be.adminExists().then((exists) => {
     if (!exists && $("#admin-claim")) {
       $("#admin-claim").innerHTML = `<button class="ghost" id="claim">🛡️ להיות המנהל של האפליקציה</button> <span class="muted">(רק החשבון הראשון שלוחץ יכול)</span>`;
