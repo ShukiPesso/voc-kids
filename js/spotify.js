@@ -92,26 +92,33 @@ function toTrack(t) {
 export async function findTrack(song) {
   const key = `${song.artist}|${song.title}`;
   if (song.uri) return song;
-  if (trackCache[key] !== undefined) return trackCache[key];
-  const queries = [`track:${song.title} artist:${song.artist}`, `${song.title} ${song.artist}`];
+  const cached = trackCache[key];
+  if (cached && !cached.miss) return cached;
+  if (cached?.miss && Date.now() - cached.miss < 24 * 3600 * 1000) return null; // not found recently: try again tomorrow
+  const queries = [`track:${song.title} artist:${song.artist}`, `${song.title} ${song.artist}`, `track:${song.title}`];
+  const want = simplify(song.title);
+  const wantArtist = simplify(song.artist);
   let best = null;
   for (const q of queries) {
     const r = await api(`/search?${new URLSearchParams({ q, type: "track", limit: "10" })}`);
     const items = (r?.tracks?.items || []).filter(Boolean);
-    const want = simplify(song.title);
     const scored = items.map((t) => {
       let s = 0;
       const n = simplify(t.name);
       if (n === want) s += 10; else if (n.includes(want) || want.includes(n)) s += 5;
-      if (t.artists.some((a) => simplify(a.name).includes(simplify(song.artist).split(" ")[0]))) s += 4;
-      if (song.duration) s -= Math.min(8, Math.abs(t.duration_ms / 1000 - song.duration) / 1.5); // same recording as the timed lyrics
+      const artistOk = t.artists.some((a) => { const an = simplify(a.name); return an && (wantArtist.includes(an) || an.includes(wantArtist.split(" ")[0])); });
+      if (artistOk) s += 4;
+      if (song.duration) {
+        const diff = Math.abs(t.duration_ms / 1000 - song.duration); // same recording as the timed lyrics?
+        s += diff <= 4 ? 3 : -Math.min(5, diff / 4);
+      }
       if (t.explicit) s -= 3;
-      if (/live|karaoke|instrumental|remix/i.test(t.name)) s -= 4;
+      if (/live|karaoke|instrumental|remix|cover|sped up|slowed/i.test(`${t.name} ${t.album?.name || ""}`)) s -= 4;
       return { t, s };
     }).sort((a, b) => b.s - a.s);
-    if (scored.length && scored[0].s >= 6) { best = toTrack(scored[0].t); break; }
+    if (scored.length && scored[0].s >= 8) { best = toTrack(scored[0].t); break; }
   }
-  trackCache[key] = best;
+  trackCache[key] = best || { miss: Date.now() };
   localStorage.setItem(LS.tracks, JSON.stringify(trackCache));
   return best;
 }
@@ -139,16 +146,33 @@ export function initPlayer() {
   document.head.appendChild(s);
 }
 
+const noDevice = () => { const err = new Error("no-device"); err.code = "no-device"; return err; };
+
 async function pickDevice() {
-  if (sdkDeviceId) return sdkDeviceId;
+  if (sdkDeviceId) return { id: sdkDeviceId, active: true };
   const { devices = [] } = (await api("/me/player/devices")) || {};
-  const d = devices.find((x) => x.is_active) || devices.find((x) => !x.is_restricted);
-  if (!d) {
-    const err = new Error("no-device");
-    err.code = "no-device";
-    throw err;
+  // prefer the active one, then this kind of device (phone app on phones)
+  const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  const d = devices.find((x) => x.is_active && !x.is_restricted) ||
+    devices.find((x) => !x.is_restricted && (mobile ? x.type === "Smartphone" : x.type === "Computer")) ||
+    devices.find((x) => !x.is_restricted);
+  if (!d) throw noDevice();
+  return { id: d.id, active: d.is_active };
+}
+
+async function startPlayback(uri, startMs) {
+  const dev = await pickDevice();
+  currentDevice = dev.id;
+  const play = () => api(`/me/player/play?device_id=${dev.id}`, { method: "PUT", body: JSON.stringify({ uris: [uri], position_ms: startMs }) });
+  try {
+    await play();
+  } catch (e) {
+    if (e.status !== 404) throw e;
+    // the Spotify app is asleep: hand playback to it first, then try again
+    await api("/me/player", { method: "PUT", body: JSON.stringify({ device_ids: [dev.id], play: false }) }).catch(() => {});
+    await new Promise((r) => setTimeout(r, 1200));
+    try { await play(); } catch (e2) { if (e2.status === 404) throw noDevice(); throw e2; }
   }
-  return d.id;
 }
 
 export async function stop() {
@@ -161,9 +185,8 @@ export async function stop() {
 export async function playSnippet(uri, startMs, endMs, onEnd) {
   clearTimeout(stopTimer);
   sdkPlayer?.activateElement?.(); // needed for autoplay rules in some browsers (must be inside a click)
-  currentDevice = await pickDevice();
   const t0 = performance.now();
-  await api(`/me/player/play?device_id=${currentDevice}`, { method: "PUT", body: JSON.stringify({ uris: [uri], position_ms: startMs }) });
+  await startPlayback(uri, startMs);
   let length = endMs - startMs;
   if (currentDevice === sdkDeviceId && sdkPlayer) {
     // wait until the local player really started, then time the stop from its actual position

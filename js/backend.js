@@ -1,6 +1,6 @@
 // Supabase: family login, synced family data, word libraries, publishing and admin.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.4";
-import { SUPABASE } from "./config.js?v=1795733771";
+import { SUPABASE } from "./config.js?v=1795769309";
 
 export const configured = !!(SUPABASE.url && SUPABASE.anonKey);
 export const sb = configured ? createClient(SUPABASE.url, SUPABASE.anonKey, {

@@ -1,7 +1,7 @@
-import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795733771";
-import * as sp from "./spotify.js?v=1795733771";
-import * as be from "./backend.js?v=1795733771";
-import { idbGet, idbSet } from "./idb.js?v=1795733771";
+import { buildMatcher, wordId, parseLRC, indexLyrics, pickLyrics, hitFromLyrics, baseForm, formsFor, tokens, tokenHash } from "../lib/matcher.js?v=1795769309";
+import * as sp from "./spotify.js?v=1795769309";
+import * as be from "./backend.js?v=1795769309";
+import { idbGet, idbSet } from "./idb.js?v=1795769309";
 
 // ---------- game settings (easy to tweak) ----------
 const LEVEL_FIRST = 100;       // points needed to finish level 1
@@ -16,8 +16,8 @@ const EXTRA_MAX_SECS = 15;     // the most extra seconds the user can add before
 
 // ---------- static data: the built-in list and the song corpus ----------
 const [builtinData, corpus] = await Promise.all([
-  fetch("data/words.json?v=1795733771").then((r) => r.json()),
-  fetch("data/index.json?v=1795733771").then((r) => r.json()),
+  fetch("data/words.json?v=1795769309").then((r) => r.json()),
+  fetch("data/index.json?v=1795769309").then((r) => r.json()),
 ]);
 const BUILTIN_ID = "builtin";
 const BUILTIN = {
@@ -39,7 +39,7 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 const app = $("#app");
 const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const cleanEn = (w) => w.en.replace(/ \(.*?\)/g, "").replace(/\.\.\.|[?.]/g, "").trim();
-const EMPTY_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
+const EMPTY_IMG = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; // transparent pixel
 const today = () => new Date().toISOString().slice(0, 10);
 const songKey = (song) => `${song.artist}|${song.title}`.toLowerCase();
 const seededRand = (seed) => { let h = 2166136261; for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) ^ Math.imul(h ^ (h >>> 13), 3266489909)) >>> 0) / 4294967296; };
@@ -377,7 +377,7 @@ function levelUpModal(lvl) {
 }
 
 function playError(e) {
-  if (e.code === "no-device") toast("לא מצאנו נגן ספוטיפיי פעיל 📱<br>פתחו את אפליקציית ספוטיפיי (בטלפון או במחשב), נגנו משהו לשנייה, ונסו שוב.", 7000);
+  if (e.code === "no-device") toast("אפליקציית ספוטיפיי לא עונה 📱<br>פתחו את ספוטיפיי, הפעילו שיר כלשהו לשנייה ועצרו, וחזרו לכאן ללחוץ ▶ שוב.", 8000);
   else if (e.status === 403) toast("ספוטיפיי לא מאפשר את זה. אם זה קרה אחרי עדכון, נסו להתנתק ולהתחבר מחדש בהגדרות.", 7000);
   else if (e.status === 401) { toast("צריך להתחבר מחדש לספוטיפיי"); sp.logout(); render(); }
   else toast("משהו השתבש: " + esc(e.message));
